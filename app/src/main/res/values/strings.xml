@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">UD3ACT8PasoDatos*</string>
+    <string name="str_pedirNombre">Pedir nombre</string>
+    <string name="str_pedirEdad">Pedir edad</string>
+    <string name="str_pedirTelefono">Pedir telefono</string>
+    <string name="str_aceptar">Aceptar</string>
+    <string name="str_introducir_nombre">Introducir nombre del alumno con ID </string>
+    <string name="str_introducir_edad">Introducir edad del alumno con ID </string>
+    <string name="str_introducir_telefono">Introducir telefono del alumno con ID </string>
+</resources>
