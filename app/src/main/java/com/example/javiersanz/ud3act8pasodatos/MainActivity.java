@@ -47,17 +47,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         // Instanciamos el Bundle
         bundle = new Bundle();
+
         // Comprobamos que el campo de texto no esté vaciío.
         if(introducirID.getText().toString() != null){
             // Si no está vacío, asignamos funciones a los botones
             if(v.getId() == R.id.buttonNombre){
-                bundle.putInt(KEY_ID, VALOR_NOMBRE);
+                bundle.putInt(KEY_TIPO_DATO, VALOR_NOMBRE);
+                bundle.putInt(KEY_ID, Integer.valueOf(introducirID.getText().toString()));
             }
             else if(v.getId() == R.id.buttonEdad){
-                bundle.putInt(KEY_ID, VALOR_EDAD);
+                bundle.putInt(KEY_TIPO_DATO, VALOR_EDAD);
+                bundle.putInt(KEY_ID, Integer.valueOf(introducirID.getText().toString()));
             }
             else if(v.getId() == R.id.buttonTelefono){
-                bundle.putInt(KEY_ID, VALOR_TELEFONO);
+                bundle.putInt(KEY_TIPO_DATO, VALOR_TELEFONO);
+                bundle.putInt(KEY_ID, Integer.valueOf(introducirID.getText().toString()));
             }
             // Preparamos el intent para pasar a la segunda actividad
             intento = new Intent(this, SecondActivity.class);
