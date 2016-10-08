@@ -1,10 +1,12 @@
 package com.example.javiersanz.ud3act8pasodatos;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -20,7 +22,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button btnPedirNombre;
     private Button btnPedirEdad;
     private Button btnPedirTelefono;
-
+    private Bundle bundle;
+    private Intent intento;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,11 +38,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         // Hacemos uso del onClick
         btnPedirNombre.setOnClickListener(this);
+        btnPedirEdad.setOnClickListener(this);
+        btnPedirTelefono.setOnClickListener(this);
 
     }
 
     @Override
     public void onClick(View v) {
+        // Instanciamos el Bundle
+        bundle = new Bundle();
+        // Comprobamos que el campo de texto no esté vaciío.
+        if(introducirID.getText().toString() != null){
+            // Si no está vacío, asignamos funciones a los botones
+            if(v.getId() == R.id.buttonNombre){
+                bundle.putInt(KEY_ID, VALOR_NOMBRE);
+            }
+            else if(v.getId() == R.id.buttonEdad){
+                bundle.putInt(KEY_ID, VALOR_EDAD);
+            }
+            else if(v.getId() == R.id.buttonTelefono){
+                bundle.putInt(KEY_ID, VALOR_TELEFONO);
+            }
+            // Preparamos el intent para pasar a la segunda actividad
+            intento = new Intent(this, SecondActivity.class);
+            intento.putExtras(bundle);
+            startActivityForResult(intento, 1234);
+        }
+        else
+            Toast.makeText(getApplicationContext(),"No has introducido ningún texto",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
     }
 }
