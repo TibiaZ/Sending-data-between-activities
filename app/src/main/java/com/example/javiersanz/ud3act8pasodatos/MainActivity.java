@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         bundle = new Bundle();
 
         // Comprobamos que el campo de texto no esté vaciío.
-        if(introducirID.getText().toString() != null){
+        if(!introducirID.getText().toString().isEmpty()){
             // Si no está vacío, asignamos funciones a los botones
             if(v.getId() == R.id.buttonNombre){
                 bundle.putInt(KEY_TIPO_DATO, VALOR_NOMBRE);
@@ -75,6 +75,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        String resultadoFinal = "";
+
+        // Obtenemos los datos del segundo activity y decidimos cuál es el resultado que se muestra
+        if(requestCode == 1234 && resultCode == RESULT_OK){
+            if(data.hasExtra(SecondActivity.KEY_NOMBRE)){
+                resultadoFinal = data.getStringExtra(SecondActivity.KEY_NOMBRE);
+                requestCode = VALOR_NOMBRE;
+            }
+            else if(data.hasExtra(SecondActivity.KEY_EDAD)){
+                resultadoFinal = data.getStringExtra(SecondActivity.KEY_EDAD);
+                requestCode = VALOR_EDAD;
+            }
+            else if(data.hasExtra(SecondActivity.KEY_TELEFONO)){
+                resultadoFinal = data.getStringExtra(SecondActivity.KEY_TELEFONO);
+                requestCode = VALOR_TELEFONO;
+            }
+        }
+
+        // Mostramos el Toast con la información devuelta
+        Toast.makeText(getApplicationContext(),"Dato devuelto: " + resultadoFinal + "\n" +
+                "Request Code: " + requestCode + "\n" +
+                "Result Code: " + resultCode,
+                Toast.LENGTH_LONG).show();
+        }
 
     }
-}
+
